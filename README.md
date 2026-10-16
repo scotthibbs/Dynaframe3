@@ -1,4 +1,23 @@
 # Dynaframe 2
+
+--------------------------NOTE--------------
+--------------------------NOTE----------------
+
+This project is deprecated. I leave it here so that it's available as source for anyone that wants to learn from it, but it no longer works. The software was tightly integrated with VLC, and VLC changed drastically after this, so it requires a 5 year old OS (Buster) to try to work.
+
+There are 2 roads to get something to work:
+1) If you're linux saavy, you can try the [pi3D project by paddy](https://pypi.org/project/picframe/) picframe project.
+
+2) If you're looking for a simple 'image it and make it an awesome picture frame with sync abilities, plugins and more' then Dynaframe still exists as a paid project ($60 if you catch it during alpha, $99 afterwards)
+It's available at http://dynaframe.pro
+
+It has video transitions, plugtins, a store, a simple updater, NFC, MQTT and automatio support, scheduled playlists and shutdowns, shader transitions and more.
+
+Thankyou for all of those taht supported me for years and allowed this to build where I could leave my job and make this my full time job to do what I truly love...make crazy cool digital media frames!
+
+--------------------------NOTE----------------
+--------------------------NOTE----------------
+
 Dynamic Photo and Video Slideshow system for SBC (such as Raspberry pi)
 
 Note: There is now a Dynaframe Pro, which is a patreon supported successor to this. This project will continue to live on as the open source/free DIY version, but if you're looking for a simpler supported product, then Dynaframe Pro is where I've put that work. It includes skinning, image based installs, and more!  Find out more and how to get it here: https://www.youtube.com/watch?v=CIwkHq_v-ZE

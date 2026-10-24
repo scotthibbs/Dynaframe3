@@ -1,3 +1,99 @@
+Update 24Oct2026: For these instructions to work, download and install the 2021-10-30 Raspios Bullseye found here: 
+https://ftp.jaist.ac.jp/pub/raspberrypi/raspios_full_armhf/images/raspios_full_armhf-2021-11-08/
+
+You can follow along with my video found here:   
+https://youtu.be/f05ztYR7nSI    
+
+I use a monitor with a Raspberry Pi to make a digital frame using Dynaframe. I show the steps to install the Raspberry Pi OS, share a USB drive on the pi with the network, and install Dynaframe. Now all my cool QSL cards are displayed.
+
+Steps in Order: (You may want to copy/paste items after Type This:) 
+01. Assemble the Raspberry Pi including heat sinks and added shims
+02. Download Belena Etcher to format  https://www.balena.io/etcher/
+03. Download the current Raspberry Pi OS. I got the "Raspberry Pi OS with desktop and 
+      recommended software" found at 
+ https://www.raspberrypi.com/software/operating-systems/
+04. Use Belena Etcher to format the sd card.
+05. Next, Country, language, timezone, change password, setup wifi, and update the pi, wait and 
+      reboot
+06. Navigate the menu to Preferences then Raspberry Pi Configuration
+ Change the hostname here to something cool like ShackFrame (I used QslShow)
+ In the Display tab, disable Screen Blanking
+ click ok and reboot
+07. First program: "gnome-disk-utility" Go to menu, Preferences, Add/Remove Software
+ Search for this file and install
+08. Plug in the USB Drive you want to erase. Find the "Disks" program in the menu and run it.
+09. Make sure you select the USB drive on the left!! Delete any partitions on the USB
+ Create a partition on the unallocated space name it USBDrive (anything)
+ Be sure to select "For use with all...(FAT)" [create]
+ Note the dev thingy here. If it's the only partition on the drive it will be /dev/sda
+10. Open a terminal window found at the top Type this: 
+       sudo nano /etc/fstab
+ Arrow down to the bottom line without deleting anything (use your dev/sda name)
+ Type this: /dev/sda /mnt/MyPictures vfat defaults,umask=0000,nofail 0 0
+ (these are all zeros with spaces before each at the end. I added an extra zero to the umask, it 
+       may have no affect but what the hay.)
+ To exit and save in nano we hold control to type x, then type y for yes, then hit enter to keep
+ the same file name. 
+11. When at the prompt again, Type This: sudo reboot
+12. After the reboot we want to check our folder. Open the File Manager at the top. Navigate and 
+      click on mnt. Right click on the MyPictures folder. Select Properties. Select the permisions 
+      tab. All these should read "Anyone" If they don't repeat step 10 and correct your error.
+13. Open a terminal window Type this: sudo apt-get install samba
+ Hit enter and type y for yes when prompted. When finished
+ Type This: sudo nano /etc/samba/smb.conf
+ Arrow down to the bottom of this file without deleting anything.
+ At the bottom left we will add the name of the share then tab the rest so it looks like this:
+ [FramePics]
+  Path = /mnt/MyPictures
+  read only = no
+  public = yes
+  writable = yes
+  guest ok = yes
+ To exit and save in nano we hold control to type x, then type y for yes, then hit enter to keep
+ the same file name. 
+14. When at the prompt again, Type This: sudo reboot
+15. From another computer: In Windows open File Explorer and in the address bar at the top 
+ Type This: \\QslShow 
+  (Instead of Qslshow this would be the hostname you picked in step 6)
+ You should be able to see the FramePics folder, open it, create a new file, and delete it. 
+ If not, repeat step 13. Add a few pictures to this folder now.
+
+16. Back at the Pi, open a terminal window. (Add "https:" in place of ~) 
+sudo wget ~//github.com/Geektoolkit/Dynaframe3/releases/download/2.19/install.sh && bash install.sh; rm -f install.sh ; sudo reboot
+
+17. After reboot and about 10 seconds you should see a black Dynaframe screen. 
+ Without typing anything else: hit escape. Using the file Manager navigate to the Dynaframe 
+      Folder. Scroll to run.sh and right click to copy it. Now right click on the desktop to paste it. 
+ Mouse over your wifi at the top for your ip address if you want but we will use the hostname 
+      like we did earlier. Double click the run.sh file and choose Execute. 
+18. At another computer: In Windows open a browser Type This: Qslshow:8000
+ (this is your hostname from step 6 so it could be Shackframe:8000)
+ You should be directed to the Dynaframe page on the Raspberry Pi
+19. Click the second tab called "playlists" in the "Add Directory" box 
+ Type This: /mnt/MyPictures
+ Click Save. You should see this folder added above.
+20. Click on Controls
+ Click on "Update file list" and then click next. You should see a picture from the usb drive. 
+ I changed my transition duration during fades in settings to 3000. 
+ Double sticky tape this up to the back of the monitor to look nice and ENJOY! 
+
+The Dynaframe video about the new features is here:  https://youtu.be/XEaUsaNEzjY
+
+The Dynaframe github can be found at https://github.com/Geektoolkit/Dynaframe3
+
+The Canakit Raspberry Pi 3B+ for $120 is here: https://www.canakit.com/raspberry-pi-3-ultimate-kit.html
+
+73, Scott KD4SIR
+
+
+
+
+
+
+
+
+
+
 # Dynaframe 2
 
 --------------------------NOTE--------------
